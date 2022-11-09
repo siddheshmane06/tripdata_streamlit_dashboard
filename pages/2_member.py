@@ -7,6 +7,9 @@ import seaborn as sns
 df=pd.read_csv("member.csv")
 
 st.set_page_config(page_title="member",page_icon='cycling.png' , layout= 'wide')
+with open('style.css') as f:
+    st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
+    
 st.title("Membership Users")
 st.markdown("---")
 
