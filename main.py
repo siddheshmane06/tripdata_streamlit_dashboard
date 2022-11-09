@@ -75,7 +75,7 @@ with left_column:
     fig = px.pie(df,names="member_casual")
     st.plotly_chart(fig)
 with right_column:
-    fig=px.sunburst(data_frame=df,path=["member_casual","rideable_type"],color=df["rideable_type"])
+    fig=px.sunburst(data_frame=df,path=["member_casual","rideable_type","day_of_week"],color=df["rideable_type"])
     st.plotly_chart(fig)
 
 st.markdown("---")
