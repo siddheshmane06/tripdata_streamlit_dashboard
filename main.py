@@ -7,6 +7,9 @@ import seaborn as sns
 df=pd.read_csv("tripdata.csv")
 
 st.set_page_config(page_title="Divvy Cycle Trip Data",page_icon='cycling.png' , layout= 'wide')
+with open('style.css') as f:
+    st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
+    
 st.title('Divvy Cycle Trip')
 st.markdown("---")
 
