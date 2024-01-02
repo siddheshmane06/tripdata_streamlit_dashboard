@@ -89,7 +89,7 @@ st.write('You selected:', option)
 if option == "Per Day":
     summary=df.groupby(['member_casual','day_of_week'])['trip_duration_min'].agg(['mean'])
     summary=summary.reset_index()
-    fig=sns.catplot(data=summary, kind='bar', x='day_of_week', y='mean', hue='member_casual', height=4, aspect=1.5)
+    fig=sns.catplot(data=summary, kind='bar', x='day_of_week', y='mean', hue='member_casual', height=4, aspect=3.5)
     plt.title('Average length of trip per day and per member type')
     st.pyplot(fig)
 
