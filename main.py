@@ -89,14 +89,14 @@ st.write('You selected:', option)
 if option == "Per Day":
     summary=df.groupby(['member_casual','day_of_week'])['trip_duration_min'].agg(['mean'])
     summary=summary.reset_index()
-    fig=sns.catplot(data=summary, kind='bar', x='day_of_week', y='mean', hue='member_casual', height=7, aspect=1)
+    fig=sns.catplot(data=summary, kind='bar', x='day_of_week', y='mean', hue='member_casual', height=4, aspect=1)
     plt.title('Average length of trip per day and per member type')
     st.pyplot(fig)
 
 if option == "Per Month":
     summary2=df.groupby(['member_casual','month'])['trip_duration_min'].agg(['mean'])
     summary2=summary2.reset_index()
-    fig=sns.catplot(data=summary2, x='month', y='mean', hue='member_casual', kind='bar', height=7)
+    fig=sns.catplot(data=summary2, x='month', y='mean', hue='member_casual', kind='bar', height=4)
     plt.title('Average trip duration by customer type and month')
     st.pyplot(fig)
 st.markdown("")
