@@ -91,39 +91,29 @@ df = pd.read_csv("casual.csv")
 st.set_page_config(page_title="Casual Users", page_icon='cycling.png', layout='wide')
 st.title("Casual Users")
 
-# Interactive filters
-filter_options = st.sidebar.selectbox("Filter by:", ["Rideable Type", "Trip Duration"])
-if filter_options == "Rideable Type":
-    rideable_types = df['rideable_type'].unique()
-    selected_type = st.sidebar.selectbox("Select Rideable Type:", rideable_types)
-    filtered_df = df[df['rideable_type'] == selected_type]
-else:
-    min_duration = st.sidebar.slider("Minimum Trip Duration (minutes):", min_value=0, max_value=df['trip_duration_min'].max(), value=0)
-    filtered_df = df[df['trip_duration_min'] >= min_duration]
-
-# Display filtered data
+# Display data
 st.subheader("Filtered Data:")
-st.write(filtered_df)
+st.write(df)
 
 # Interactive charts
 st.subheader("Interactive Charts:")
 with st.expander("Start Position"):
-    fig_start = px.scatter_mapbox(filtered_df, lon=filtered_df["start_lng"], lat=filtered_df["start_lat"],
-                                   zoom=10, color=filtered_df["member_casual"], width=700, height=500)
+    fig_start = px.scatter_mapbox(df, lon=df["start_lng"], lat=df["start_lat"],
+                                  zoom=10, color=df["member_casual"], width=700, height=500)
     fig_start.update_layout(mapbox_style="open-street-map")
     st.plotly_chart(fig_start)
 
 with st.expander("End Position"):
-    fig_end = px.scatter_mapbox(filtered_df, lon=filtered_df["end_lng"], lat=filtered_df["end_lat"],
-                                 zoom=10, color=filtered_df["member_casual"], width=700, height=500)
+    fig_end = px.scatter_mapbox(df, lon=df["end_lng"], lat=df["end_lat"],
+                                zoom=10, color=df["member_casual"], width=700, height=500)
     fig_end.update_layout(mapbox_style="open-street-map")
     st.plotly_chart(fig_end)
 
 with st.expander("Rideable Type Distribution"):
-    fig_pie = px.pie(filtered_df, names="rideable_type")
+    fig_pie = px.pie(df, names="rideable_type")
     st.plotly_chart(fig_pie)
 
 with st.expander("Sunburst Chart"):
-    fig_sunburst = px.sunburst(data_frame=filtered_df, path=["member_casual", "rideable_type", "day"],
-                               color=filtered_df["rideable_type"])
+    fig_sunburst = px.sunburst(data_frame=df, path=["member_casual", "rideable_type", "day"],
+                               color=df["rideable_type"])
     st.plotly_chart(fig_sunburst)
